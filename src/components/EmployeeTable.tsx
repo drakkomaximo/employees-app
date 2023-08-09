@@ -1,50 +1,75 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Employee } from '../utils';
+import { FC } from "react";
+import { Employee } from "../utils";
 
 interface EmployeeTableProps {
   employees: Employee[];
   onDelete: (id: string) => void;
+  onEdit: (id: string) => void;
+  onView: (id: string) => void;
 }
 
-export const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees, onDelete }) => {
+export const EmployeeTable: FC<EmployeeTableProps> = ({
+  employees,
+  onDelete,
+  onEdit,
+  onView,
+}) => {
   return (
-    <table className="border-collapse w-full">
-      <thead>
-        <tr>
-          <th className="border py-2 px-4">First Name</th>
-          <th className="border py-2 px-4">Last Name</th>
-          <th className="border py-2 px-4">Position Title</th>
-          <th className="border py-2 px-4">Date Arrival</th>
-          <th className="border py-2 px-4">Status</th>
-          <th className="border py-2 px-4">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {employees.map(employee => (
-          <tr key={employee.id} className="border-t">
-            <td className="border py-2 px-4">{employee.firstName}</td>
-            <td className="border py-2 px-4">{employee.lastName}</td>
-            <td className="border py-2 px-4 capitalize">{employee.positionTitle}</td>
-            <td className="border py-2 px-4">{employee.dateArrival}</td>
-            <td className="border py-2 px-4">{employee.status}</td>
-            <td className="border py-2 px-4">
-              <Link to={`/employee/${employee.id}`} className="text-blue-500 hover:underline mx-2">
-                View
-              </Link>
-              <Link to={`/employee/edit/${employee.id}`} className="text-blue-500 hover:underline mx-2">
-                Edit
-              </Link>
-              <button
-                onClick={() => onDelete(employee.id)}
-                className="text-red-500 hover:underline mx-2 cursor-pointer"
+    <div className="text-gray-900 bg-gray-200 h-screen">
+      <div className="p-4 flex">
+        <h1 className="text-3xl">Employee List</h1>
+      </div>
+      <div className="px-3 py-4 flex justify-center">
+        <table className="w-full text-md bg-white shadow-md rounded mb-4">
+          <thead>
+            <tr className="border-b">
+              <th className="text-left p-3 px-5">First Name</th>
+              <th className="text-left p-3 px-5">Last Name</th>
+              <th className="text-left p-3 px-5">Position Title</th>
+              <th className="text-left p-3 px-5">Date Arrival</th>
+              <th className="text-left p-3 px-5">Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {employees.map((employee, index) => (
+              <tr
+                key={index}
+                className="border-b hover:bg-orange-100 bg-gray-100"
               >
-                Delete
-              </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+                <td className="p-3 px-5">{employee.firstName}</td>
+                <td className="p-3 px-5">{employee.lastName}</td>
+                <td className="p-3 px-5">{employee.positionTitle}</td>
+                <td className="p-3 px-5">{employee.dateArrival}</td>
+                <td className="p-3 px-5">{employee.status}</td>
+                <td className="p-3 px-5 flex justify-end">
+                  <button
+                    type="button"
+                    className="mr-3 text-sm bg-orange-500 hover:bg-orange-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    onClick={() => onView(employee.id)}
+                  >
+                    View
+                  </button>
+                  <button
+                    type="button"
+                    className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    onClick={() => onEdit(employee.id)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    type="button"
+                    className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    onClick={() => onDelete(employee.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 };

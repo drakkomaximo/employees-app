@@ -32,159 +32,159 @@ export const EmployeeForm: FC = () => {
   };
 
   return (
-    <div className="bg-white p-4 rounded shadow">
-      <h2 className="text-xl font-semibold mb-4">
+    <div className="flex flex-col items-center p-6">
+      <h2 className="text-3xl font-semibold mb-4">
         {isEditMode ? "Edit Employee" : "Create New Employee"}
       </h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">First Name</label>
-          <input
-            type="text"
-            defaultValue={employee?.firstName}
-            {...register("firstName", { required: true })}
-            className="border w-full py-2 px-3"
-          />
-          {errors.firstName && (
-            <p className="text-red-500">First Name is required</p>
-          )}
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full md:w-11/12">
+        <div className="bg-white shadow-md rounded p-4">
+          <div className="grid grid-cols-3 gap-4">
+          <div className="mb-4">
+            <label className="block font-medium mb-2">First Name</label>
+            <input
+              type="text"
+              defaultValue={employee?.firstName}
+              {...register("firstName", { required: true })}
+              className="bg-gray-100 p-2 rounded w-full"
+            />
+            {errors.firstName && (
+              <p className="text-red-500">First Name is required</p>
+            )}
+          </div>
+          <div className="mb-4">
+            <label className="block font-medium mb-2">Middle Name</label>
+            <input
+              type="text"
+              defaultValue={employee?.middleName}
+              {...register("middleName")}
+              className="bg-gray-100 p-2 rounded w-full"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block font-medium mb-2">Last Name</label>
+            <input
+              type="text"
+              defaultValue={employee?.lastName}
+              {...register("lastName", { required: true })}
+              className="bg-gray-100 p-2 rounded w-full"
+            />
+            {errors.lastName && (
+              <p className="text-red-500">Last Name is required</p>
+            )}
+          </div>
+          <div className="mb-4">
+            <label className="block font-medium mb-2">Location City</label>
+            <input
+              type="text"
+              defaultValue={employee?.locationCity}
+              {...register("locationCity", { required: true })}
+              className="bg-gray-100 p-2 rounded w-full"
+            />
+            {errors.locationCity && (
+              <p className="text-red-500">Location City is required</p>
+            )}
+          </div>
+          <div className="mb-4">
+            <label className="block font-medium mb-2">Address</label>
+            <input
+              type="text"
+              defaultValue={employee?.address}
+              {...register("address", { required: true })}
+              className="bg-gray-100 p-2 rounded w-full"
+            />
+            {errors.address && (
+              <p className="text-red-500">Address is required</p>
+            )}
+          </div>
+          <div className="mb-4">
+            <label className="block font-medium mb-2">Date Birth</label>
+            <input
+              type="date"
+              defaultValue={employee?.dateBirth}
+              {...register("dateBirth", { required: true })}
+              className="bg-gray-100 p-2 rounded w-full"
+            />
+            {errors.dateBirth && (
+              <p className="text-red-500">Date Birth is required</p>
+            )}
+          </div>
+          <div className="mb-4">
+            <label className="block font-medium mb-2">Telephone</label>
+            <input
+              type="tel"
+              defaultValue={employee?.telephone}
+              {...register("telephone", { required: true })}
+              className="bg-gray-100 p-2 rounded w-full"
+            />
+            {errors.telephone && (
+              <p className="text-red-500">Telephone is required</p>
+            )}
+          </div>
+          <div className="mb-4">
+            <label className="block font-medium mb-2">Position Title</label>
+            <select
+              {...register("positionTitle", { required: true })}
+              className="bg-gray-100 p-2 rounded w-full"
+              defaultValue={employee?.positionTitle}
+            >
+              <option value="">Select Position Title</option>
+              <option value="counter">Counter</option>
+              <option value="developer">Developer</option>
+              <option value="manager">Manager</option>
+            </select>
+            {errors.positionTitle && (
+              <p className="text-red-500">Position Title is required</p>
+            )}
+          </div>
+          <div className="mb-4">
+            <label className="block font-medium mb-2">Hire Date</label>
+            <input
+              type="date"
+              defaultValue={employee?.dateArrival}
+              {...register("dateArrival", { required: true })}
+              className="bg-gray-100 p-2 rounded w-full"
+            />
+            {errors.dateArrival && (
+              <p className="text-red-500">Hire Date is required</p>
+            )}
+          </div>
+          <div className="mb-4">
+            <label className="block font-medium mb-2">Email</label>
+            <input
+              type="email"
+              defaultValue={employee?.email}
+              {...register("email", { required: true })}
+              className="bg-gray-100 p-2 rounded w-full"
+            />
+            {errors.email && <p className="text-red-500">Email is required</p>}
+          </div>
+          <div className="mb-4">
+            <label className="block font-medium mb-2">Salary</label>
+            <input
+              type="number"
+              defaultValue={employee?.salary}
+              {...register("salary", { required: true })}
+              className="bg-gray-100 p-2 rounded w-full"
+            />
+            {errors.salary && (
+              <p className="text-red-500">Salary is required</p>
+            )}
+          </div>
+          <div className="mb-4">
+            <label className="block font-medium mb-2">Time in Position</label>
+            <input
+              type="text"
+              defaultValue={employee?.timeInPosition}
+              {...register("timeInPosition")}
+              className="bg-gray-100 p-2 rounded w-full"
+            />
+          </div>
+          </div>
         </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Middle Name</label>
-          <input
-            type="text"
-            defaultValue={employee?.middleName}
-            {...register("middleName")}
-            className="border w-full py-2 px-3"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Last Name</label>
-          <input
-            type="text"
-            defaultValue={employee?.lastName}
-            {...register("lastName", { required: true })}
-            className="border w-full py-2 px-3"
-          />
-          {errors.lastName && (
-            <p className="text-red-500">Last Name is required</p>
-          )}
-        </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Location City</label>
-          <input
-            type="text"
-            defaultValue={employee?.locationCity}
-            {...register("locationCity", { required: true })}
-            className="border w-full py-2 px-3"
-          />
-          {errors.locationCity && (
-            <p className="text-red-500">Location City is required</p>
-          )}
-        </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Address</label>
-          <input
-            type="text"
-            defaultValue={employee?.address}
-            {...register("address", { required: true })}
-            className="border w-full py-2 px-3"
-          />
-          {errors.address && (
-            <p className="text-red-500">Address is required</p>
-          )}
-        </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Date Birth</label>
-          <input
-            type="date"
-            defaultValue={employee?.dateBirth}
-            {...register("dateBirth", { required: true })}
-            className="border w-full py-2 px-3"
-          />
-          {errors.dateBirth && (
-            <p className="text-red-500">Date Birth is required</p>
-          )}
-        </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Telephone</label>
-          <input
-            type="tel"
-            defaultValue={employee?.telephone}
-            {...register("telephone", { required: true })}
-            className="border w-full py-2 px-3"
-          />
-          {errors.telephone && (
-            <p className="text-red-500">Telephone is required</p>
-          )}
-        </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Position Title</label>
-          {/*           <input
-            type="text"
-            defaultValue={employee?.positionTitle}
-            {...register("positionTitle", { required: true })}
-            className="border w-full py-2 px-3"
-          /> */}
-          <select
-            {...register("positionTitle", { required: true })}
-            className="border w-full py-2 px-3"
-            defaultValue={employee?.positionTitle}
-          >
-            <option value="">Select Position Title</option>
-            <option value="counter">Counter</option>
-            <option value="developer">Developer</option>
-            <option value="manager">Manager</option>
-          </select>
-          {errors.positionTitle && (
-            <p className="text-red-500">Position Title is required</p>
-          )}
-        </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Hire Date</label>
-          <input
-            type="date"
-            defaultValue={employee?.dateArrival}
-            {...register("dateArrival", { required: true })}
-            className="border w-full py-2 px-3"
-          />
-          {errors.dateArrival && (
-            <p className="text-red-500">Hire Date is required</p>
-          )}
-        </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Email</label>
-          <input
-            type="email"
-            defaultValue={employee?.email}
-            {...register("email", { required: true })}
-            className="border w-full py-2 px-3"
-          />
-          {errors.email && <p className="text-red-500">Email is required</p>}
-        </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Salary</label>
-          <input
-            type="number"
-            defaultValue={employee?.salary}
-            {...register("salary", { required: true })}
-            className="border w-full py-2 px-3"
-          />
-          {errors.salary && <p className="text-red-500">Salary is required</p>}
-        </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Time in Position</label>
-          <input
-            type="text"
-            defaultValue={employee?.timeInPosition}
-            {...register("timeInPosition")}
-            className="border w-full py-2 px-3"
-          />
-        </div>
-        <div className="mt-4">
+        <div className="flex justify-center items-center mt-8">
           <button
             type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+            className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             {isEditMode ? "Save Changes" : "Create Employee"}
           </button>
