@@ -3,11 +3,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useFakeApi } from "../hooks";
 import EmployeeContext from "../context/employeeContext";
 import { EmployeeDetails, Loader } from "../components";
+import { notification } from "../utils/notifications";
 
 export const EmployeeDetailsPage: FC = () => {
   const navigate = useNavigate();
   const { employeeId } = useParams<{ employeeId: string }>();
-  const { employee, cleanEmployee } = useContext(EmployeeContext);
+  const { employee, counter, resetCounter, cleanEmployee } = useContext(EmployeeContext);
   const { getEmployeeById, deleteEmployee, isloading } = useFakeApi();
 
   const handleGoBack = () => {
@@ -26,9 +27,25 @@ export const EmployeeDetailsPage: FC = () => {
 
   useEffect(() => {
     if (employeeId) {
-      !employee && getEmployeeById(employeeId);
+      if(!employee){
+        getEmployeeById(employeeId); 
+      }else{
+        resetCounter()
+      }
     }
-  }, [employeeId, getEmployeeById, employee]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [employeeId, employee, getEmployeeById]);
+
+  useEffect(() => {
+    if (!employee && counter === 3) {
+      resetCounter()
+      navigate('/')
+      notification({
+        type: 'error',
+        text: 'User not found'
+      })
+    }
+  }, [counter, employee, resetCounter, navigate]);
 
   if (!employee) {
     return <Loader />;
@@ -40,3 +57,4 @@ export const EmployeeDetailsPage: FC = () => {
     <EmployeeDetails employee={employee} employeeId={employeeId} onCancel={handleGoBack} onDelete={handleDeleteEmployee} onEdit={handleEditEmployee}/>
   );
 };
+

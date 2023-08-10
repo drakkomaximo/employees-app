@@ -3,6 +3,9 @@ import { v4 as uuid } from 'uuid';
 import { Employee, fakeData } from "../utils";
 
 interface EmployeeContextProps {
+  counter: number;
+  incrementCounter: () => void;
+  resetCounter: () => void;
   employee: Employee | null;
   employees: Employee[];
   addEmployee: (newEmployee: Employee) => void;
@@ -21,6 +24,7 @@ const EmployeeContext = createContext({} as EmployeeContextProps);
 export const EmployeeProvider: FC<EmployeeProviderProps> = ({ children }) => {
   const [employee, setEmployee] = useState<Employee | null>(null);
   const [employees, setEmployees] = useState<Employee[]>([]);
+  const [counter, setCounter] = useState(0)
 
   useEffect(() => {
     const savedEmployees = localStorage.getItem("employees");
@@ -65,13 +69,24 @@ export const EmployeeProvider: FC<EmployeeProviderProps> = ({ children }) => {
   const getEmployeeById = (employeeId: string) => {
     const employee = employees.find((emp) => emp.id === employeeId);
     setEmployee(employee || null);
+    incrementCounter()
   };
 
   const cleanEmployee = () => {
     setEmployee(null);
   };
 
+  const incrementCounter = () =>{
+    console.log(counter)
+    setCounter(counter + 1)
+  }
+
+  const resetCounter = () =>{
+    setCounter(0)
+  }
+
   const contextValue = {
+    counter,
     employee,
     employees,
     addEmployee,
@@ -79,6 +94,8 @@ export const EmployeeProvider: FC<EmployeeProviderProps> = ({ children }) => {
     deleteEmployee,
     getEmployeeById,
     cleanEmployee,
+    incrementCounter,
+    resetCounter
   };
 
   return (
