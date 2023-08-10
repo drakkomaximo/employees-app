@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { addressKeywords, cityOptions, prefixMoney } from ".";
+import { addressKeywords, calculateAgeInYears, cityOptions, extractYearsFromTimeInPosition, prefixMoney } from ".";
 
 const isAdult = (value: string): boolean => {
   const today = new Date();
@@ -68,14 +68,9 @@ const addressValidator = z.string().refine(
   (value) => {
     const convertedAddress = value.trim().toLowerCase();
     for (const keyword of addressKeywords) {
-      const keywordWithSpace = keyword.toLowerCase() + " ";
+      const keywordWithSpace = keyword.toLowerCase();
       if (convertedAddress.startsWith(keywordWithSpace)) {
-        const afterKeyword = convertedAddress.substring(
-          keywordWithSpace.length
-        );
-        if (afterKeyword.length >= 1) {
-          return true;
-        }
+        return true;
       }
     }
     return false;
@@ -95,7 +90,7 @@ export const employeeSchema = z
     positionTitle: positionTitleSchema,
     email: z.string().email("Invalid email format").min(1, "Email is required"),
     salary: salarySchema,
-    timeInPosition: z.string(),
+    timeInPosition: z.string().nonempty("Time In Position is required and depend of Hire Date"),
     dateBirth: z.string().refine((value) => isAdult(value), {
       message: "You must be at least 18 years old",
     }),
@@ -113,4 +108,15 @@ export const employeeSchema = z
           "Hire date must be valid and at least 18 years after birth date",
       });
     }
-  });
+  })
+  .superRefine(({ hireDate, timeInPosition}, ctx) => {
+    if (extractYearsFromTimeInPosition(timeInPosition!) > calculateAgeInYears(hireDate!)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["timeInPosition"],
+        message:
+          "Must be less than or equal to the hire date in years",
+      });
+    }
+  })
+  ;

@@ -23,7 +23,7 @@ export const HomePage: FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className="bg-gray-200 h-screen">
       {isloading ? (
         <Loader />
       ) : (

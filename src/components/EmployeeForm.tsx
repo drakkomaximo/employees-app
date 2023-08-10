@@ -90,7 +90,7 @@ export const EmployeeForm: FC = () => {
                 className="bg-gray-100 p-2 rounded w-full"
               />
               {errors.firstName && (
-                <p className="text-red-500">{errors.firstName.message}</p>
+                <p className="text-red-500 text-[0.75rem]">{errors.firstName.message}</p>
               )}
             </div>
             <div className="mb-2">
@@ -102,7 +102,7 @@ export const EmployeeForm: FC = () => {
                 className="bg-gray-100 p-2 rounded w-full"
               />
               {errors.middleName && (
-                <p className="text-red-500">{errors.middleName.message}</p>
+                <p className="text-red-500 text-[0.75rem]">{errors.middleName.message}</p>
               )}
             </div>
             <div className="mb-2">
@@ -114,7 +114,7 @@ export const EmployeeForm: FC = () => {
                 className="bg-gray-100 p-2 rounded w-full"
               />
               {errors.lastName && (
-                <p className="text-red-500">{errors.lastName.message}</p>
+                <p className="text-red-500 text-[0.75rem]">{errors.lastName.message}</p>
               )}
             </div>
             <div className="mb-2">
@@ -126,7 +126,7 @@ export const EmployeeForm: FC = () => {
                 className="bg-gray-100 p-2 rounded w-full"
               />
               {errors.locationCity && (
-                <p className="text-red-500">{errors.locationCity.message}</p>
+                <p className="text-red-500 text-[0.75rem]">{errors.locationCity.message}</p>
               )}
             </div>
             <div className="mb-2">
@@ -138,7 +138,7 @@ export const EmployeeForm: FC = () => {
                 className="bg-gray-100 p-2 rounded w-full"
               />
               {errors.address && (
-                <p className="text-red-500">{errors.address.message}</p>
+                <p className="text-red-500 text-[0.75rem]">{errors.address.message}</p>
               )}
             </div>
             <div className="mb-2">
@@ -151,7 +151,7 @@ export const EmployeeForm: FC = () => {
                 className="bg-gray-100 p-2 rounded w-full"
               />
               {errors.dateBirth && (
-                <p className="text-red-500">{errors.dateBirth.message}</p>
+                <p className="text-red-500 text-[0.75rem]">{errors.dateBirth.message}</p>
               )}
             </div>
             <div className="mb-2">
@@ -178,7 +178,7 @@ export const EmployeeForm: FC = () => {
                 )}
               />
               {errors.telephone && (
-                <p className="text-red-500">{errors.telephone.message}</p>
+                <p className="text-red-500 text-[0.75rem]">{errors.telephone.message}</p>
               )}
             </div>
             <div className="mb-2">
@@ -194,7 +194,7 @@ export const EmployeeForm: FC = () => {
                 <option value="manager">Manager</option>
               </select>
               {errors.positionTitle && (
-                <p className="text-red-500">{errors.positionTitle.message}</p>
+                <p className="text-red-500 text-[0.75rem]">{errors.positionTitle.message}</p>
               )}
             </div>
             <div className="mb-2">
@@ -207,7 +207,7 @@ export const EmployeeForm: FC = () => {
                 className="bg-gray-100 p-2 rounded w-full"
               />
               {errors.hireDate && (
-                <p className="text-red-500">{errors.hireDate.message}</p>
+                <p className="text-red-500 text-[0.75rem]">{errors.hireDate.message}</p>
               )}
             </div>
             <div className="mb-2">
@@ -219,7 +219,7 @@ export const EmployeeForm: FC = () => {
                 className="bg-gray-100 p-2 rounded w-full"
               />
               {errors.email && (
-                <p className="text-red-500">{errors.email.message}</p>
+                <p className="text-red-500 text-[0.75rem]">{errors.email.message}</p>
               )}
             </div>
             <div className="mb-2">
@@ -242,7 +242,7 @@ export const EmployeeForm: FC = () => {
                 )}
               />
               {errors.salary && (
-                <p className="text-red-500">{errors.salary.message}</p>
+                <p className="text-red-500 text-[0.75rem]">{errors.salary.message}</p>
               )}
             </div>
             <div className="mb-2">
@@ -265,6 +265,9 @@ export const EmployeeForm: FC = () => {
                   />
                 )}
               />
+              {errors.timeInPosition && (
+                <p className="text-red-500 text-[0.75rem]">{errors.timeInPosition.message}</p>
+              )}
             </div>
           </div>
         </div>

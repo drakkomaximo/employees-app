@@ -24,3 +24,24 @@ export const removeLeadingZeros = (input: string) => {
   
   return `${prefixMoney}${integerPart}${parts.length > 1 ? "." + parts.slice(1).join(".") : ''}`
 }
+
+export const calculateAgeInYears = (hireDate: string): number => {
+  const today = new Date();
+  const hireDateObj = new Date(hireDate);
+  
+  const timeDiffInMilliseconds = today.getTime() - hireDateObj.getTime();
+  const timeDiffInYears = Math.floor(timeDiffInMilliseconds / (1000 * 60 * 60 * 24 * 365));
+  
+  return timeDiffInYears;
+}
+
+export const extractYearsFromTimeInPosition = (timeInPosition: string): number => {
+  const regex = /^(\d+)\s+years?$/i;
+  const match = timeInPosition.match(regex);
+
+  if (match && match[1]) {
+    return parseInt(match[1], 10);
+  }
+
+  return 0;
+}

@@ -16,7 +16,7 @@ export const EmployeeTable: FC<EmployeeTableProps> = ({
   onView,
 }) => {
   return (
-    <div className="text-gray-900 bg-gray-200 h-screen">
+    <div className="text-gray-900 bg-gray-200 h-full">
       <div className="p-4 flex justify-center">
         <h1 className="text-3xl font-bold">Employee Manager App</h1>
       </div>
