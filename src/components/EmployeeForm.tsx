@@ -1,7 +1,17 @@
 import { FC, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
-import { Employee, decimalScaleValue, decimalSeparatorValue, employeeSchema, formattedSuffixYear, prefixMoney, thousandSeparatorValue } from "../utils";
+import {
+  Employee,
+  decimalScaleValue,
+  decimalSeparatorValue,
+  employeeSchema,
+  formattedSuffixYear,
+  maxDate,
+  prefixMoney,
+  removeLeadingZeros,
+  thousandSeparatorValue,
+} from "../utils";
 import { useFakeApi } from "../hooks";
 import EmployeeContext from "../context/employeeContext";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -34,9 +44,17 @@ export const EmployeeForm: FC = () => {
 
   const onSubmit = (data: Employee) => {
     if (isEditMode) {
-      updateEmployee({ ...data, id: employee!.id, status: "Active" });
+      updateEmployee({
+        ...data,
+        id: employee!.id,
+        salary: removeLeadingZeros(data.salary),
+        status: "Active",
+      });
     } else {
-      addEmployee(data);
+      addEmployee({
+        ...data,
+        salary: removeLeadingZeros(data.salary)
+      });
     }
     onCancel();
   };
@@ -127,6 +145,7 @@ export const EmployeeForm: FC = () => {
               <label className="block font-medium mb-2">Date Birth</label>
               <input
                 type="date"
+                max={maxDate}
                 defaultValue={employee?.dateBirth}
                 {...register("dateBirth", { required: true })}
                 className="bg-gray-100 p-2 rounded w-full"
@@ -182,6 +201,7 @@ export const EmployeeForm: FC = () => {
               <label className="block font-medium mb-2">Hire Date</label>
               <input
                 type="date"
+                max={maxDate}
                 defaultValue={employee?.hireDate}
                 {...register("hireDate", { required: true })}
                 className="bg-gray-100 p-2 rounded w-full"
@@ -211,6 +231,7 @@ export const EmployeeForm: FC = () => {
                 render={({ field }) => (
                   <NumericFormat
                     {...field}
+                    min={1}
                     allowNegative={false}
                     decimalScale={decimalScaleValue}
                     thousandSeparator={thousandSeparatorValue}
@@ -233,6 +254,7 @@ export const EmployeeForm: FC = () => {
                 render={({ field }) => (
                   <NumericFormat
                     {...field}
+                    min={1}
                     maxLength={8}
                     allowNegative={false}
                     decimalScale={decimalScaleValue}

@@ -14,7 +14,7 @@ export const fakeData: Employee[] = [
     telephone: "555-1234",
     hireDate: "2023-08-01",
     email: "john.doe@example.com",
-    salary: "75000",
+    salary: "$75.000",
     timeInPosition: "2 years",
   },
   {
@@ -30,7 +30,7 @@ export const fakeData: Employee[] = [
     telephone: "555-5678",
     hireDate: "2023-07-15",
     email: "jane.smith@example.com",
-    salary: "65000",
+    salary: "$65.000",
     timeInPosition: "1 year",
   },
 ];
@@ -40,3 +40,6 @@ export const suffixYear = " year";
 export const decimalScaleValue = 0;
 export const thousandSeparatorValue = ".";
 export const decimalSeparatorValue = ",";
+export const maxDate = new Date().toISOString().split("T")[0];
+// always in minus
+export const addressKeywords = ['calle', 'avenida', 'transversal'] 

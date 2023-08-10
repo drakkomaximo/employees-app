@@ -1,8 +1,13 @@
-import allCities from 'all-countries-and-cities-json';
+import allCities from "all-countries-and-cities-json";
 
-export const cityOptions = Array.from(new Set(
-    Object.values(allCities)
+// new cities to add in minus
+const aditionalCities = ["bogotá", "cali", "ibagué"];
+
+export const cityOptions = Array.from(
+  new Set([
+    ...aditionalCities,
+    ...Object.values(allCities)
       .flatMap((cities) => cities)
-      .map((city) => city.toLowerCase())
-  ))
-  .sort();
+      .map((city) => city.toLowerCase()),
+  ])
+).sort();
