@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import EmployeeContext from "../context/employeeContext";
 import { Employee, simulateApiCall } from "../utils";
+import { notification } from "../utils/notifications";
 
 export const useFakeApi = () => {
   const {
@@ -27,6 +28,10 @@ export const useFakeApi = () => {
       setIsloading(true);
       const addedEmployee = await simulateApiCall<Employee>(newEmployee);
       contextAddEmployee(addedEmployee);
+      notification({
+        text: "Employee has been created",
+        type: "success",
+      });
     } catch (error) {
       console.log(error);
     } finally {
@@ -39,6 +44,10 @@ export const useFakeApi = () => {
       setIsloading(true);
       const updatedData = await simulateApiCall<Employee>(updatedEmployee);
       contextUpdateEmployee(updatedData);
+      notification({
+        text: "Employee has been updated",
+        type: "success",
+      });
     } catch (error) {
       console.log(error);
     } finally {
@@ -51,6 +60,10 @@ export const useFakeApi = () => {
       setIsloading(true);
       await simulateApiCall<string>(employeeId);
       contextDeleteEmployee(employeeId);
+      notification({
+        text: "Employee has been deleted",
+        type: "success",
+      });
     } catch (error) {
       console.log(error);
     } finally {

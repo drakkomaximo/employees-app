@@ -1,12 +1,13 @@
 import { FC, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
-import { Employee, employeeSchema } from "../utils";
+import { Employee, decimalScaleValue, decimalSeparatorValue, employeeSchema, formattedSuffixYear, prefixMoney, thousandSeparatorValue } from "../utils";
 import { useFakeApi } from "../hooks";
 import EmployeeContext from "../context/employeeContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { NumericFormat } from "react-number-format";
 
 export const EmployeeForm: FC = () => {
   const navigate = useNavigate();
@@ -17,11 +18,13 @@ export const EmployeeForm: FC = () => {
     setValue,
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<Employee>({
     resolver: zodResolver(employeeSchema),
   });
 
+  const watchTimeInPosition = watch("timeInPosition");
   const isEditMode = !!employee;
 
   const onCancel = () => {
@@ -45,13 +48,15 @@ export const EmployeeForm: FC = () => {
   }, [errors]);
 
   useEffect(() => {
-    if (employee && employee.telephone) {
-      setValue('telephone', employee.telephone)
+    if (employee) {
+      setValue("telephone", employee.telephone);
+      setValue("salary", employee.salary);
+      setValue("timeInPosition", employee.timeInPosition);
     }
   }, [employee, setValue]);
 
   return (
-    <div className="flex flex-col items-center p-4">
+    <div className="flex flex-col items-center justify-center p-4 bg-gray-200 h-screen">
       <h2 className="text-3xl font-semibold mb-2">
         {isEditMode ? "Edit Employee" : "Create New Employee"}
       </h2>
@@ -148,7 +153,7 @@ export const EmployeeForm: FC = () => {
                       border: "none",
                       fontSize: "1rem",
                       height: "2.625rem",
-                      width: 'auto',
+                      width: "auto",
                     }}
                   />
                 )}
@@ -199,11 +204,21 @@ export const EmployeeForm: FC = () => {
             </div>
             <div className="mb-2">
               <label className="block font-medium mb-2">Salary</label>
-              <input
-                type="number"
-                defaultValue={employee?.salary}
-                {...register("salary", { required: true })}
-                className="bg-gray-100 p-2 rounded w-full"
+              <Controller
+                name="salary"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <NumericFormat
+                    {...field}
+                    allowNegative={false}
+                    decimalScale={decimalScaleValue}
+                    thousandSeparator={thousandSeparatorValue}
+                    decimalSeparator={decimalSeparatorValue}
+                    prefix={prefixMoney}
+                    className="bg-gray-100 p-2 rounded w-full"
+                  />
+                )}
               />
               {errors.salary && (
                 <p className="text-red-500">{errors.salary.message}</p>
@@ -211,28 +226,39 @@ export const EmployeeForm: FC = () => {
             </div>
             <div className="mb-2">
               <label className="block font-medium mb-2">Time in Position</label>
-              <input
-                type="text"
-                defaultValue={employee?.timeInPosition}
-                {...register("timeInPosition")}
-                className="bg-gray-100 p-2 rounded w-full"
+              <Controller
+                name="timeInPosition"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <NumericFormat
+                    {...field}
+                    maxLength={8}
+                    allowNegative={false}
+                    decimalScale={decimalScaleValue}
+                    thousandSeparator={thousandSeparatorValue}
+                    decimalSeparator={decimalSeparatorValue}
+                    suffix={formattedSuffixYear(watchTimeInPosition)}
+                    className="bg-gray-100 p-2 rounded w-full"
+                  />
+                )}
               />
             </div>
           </div>
         </div>
         <div className="flex justify-center items-center mt-8">
           <button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            {isEditMode ? "Save Changes" : "Create Employee"}
-          </button>
-          <button
             type="button"
-            className="bg-gray-300 text-gray-700 py-2 px-4 rounded ml-2"
+            className="font-bold bg-red-500 text-white py-2 px-4 rounded mr-4"
             onClick={onCancel}
           >
             Cancel
+          </button>
+          <button
+            type="submit"
+            className="font-bold bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            {isEditMode ? "Save Changes" : "Create Employee"}
           </button>
         </div>
       </form>

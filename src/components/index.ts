@@ -1,4 +1,6 @@
 export * from './AddEmployee'
 export * from './EmployeeForm'
 export * from './EmployeeTable'
+export * from './NoMoreEmployees'
+export * from './EmployeeDetails'
 export * from './Loader'
