@@ -16,8 +16,8 @@ export const EmployeeTable: FC<EmployeeTableProps> = ({
 }) => {
   return (
     <div className="text-gray-900 bg-gray-200 h-screen">
-      <div className="p-4 flex">
-        <h1 className="text-3xl">Employee List</h1>
+      <div className="p-4 flex justify-center">
+        <h1 className="text-3xl font-bold">Employee List</h1>
       </div>
       <div className="px-3 py-4 flex justify-center">
         <table className="w-full text-md bg-white shadow-md rounded mb-4">
@@ -39,27 +39,27 @@ export const EmployeeTable: FC<EmployeeTableProps> = ({
               >
                 <td className="p-3 px-5">{employee.firstName}</td>
                 <td className="p-3 px-5">{employee.lastName}</td>
-                <td className="p-3 px-5">{employee.positionTitle}</td>
-                <td className="p-3 px-5">{employee.dateArrival}</td>
+                <td className="p-3 px-5 capitalize">{employee.positionTitle}</td>
+                <td className="p-3 px-5">{employee.hireDate}</td>
                 <td className="p-3 px-5">{employee.status}</td>
-                <td className="p-3 px-5 flex justify-end">
+                <td className="p-3 flex justify-evenly">
                   <button
                     type="button"
-                    className="mr-3 text-sm bg-orange-500 hover:bg-orange-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    className="mr-3 font-bold text-sm bg-orange-500 hover:bg-orange-700 text-white py-1 px-6 rounded focus:outline-none focus:shadow-outline"
                     onClick={() => onView(employee.id)}
                   >
                     View
                   </button>
                   <button
                     type="button"
-                    className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    className="mr-3 font-bold text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-6 rounded focus:outline-none focus:shadow-outline"
                     onClick={() => onEdit(employee.id)}
                   >
                     Edit
                   </button>
                   <button
                     type="button"
-                    className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    className="font-bold text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-6 rounded focus:outline-none focus:shadow-outline"
                     onClick={() => onDelete(employee.id)}
                   >
                     Delete

@@ -2,6 +2,7 @@ import { useEffect, FC, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useFakeApi } from "../hooks";
 import EmployeeContext from "../context/employeeContext";
+import { Loader } from "../components";
 
 export const EmployeeDetailsPage: FC = () => {
   const navigate = useNavigate();
@@ -30,11 +31,11 @@ export const EmployeeDetailsPage: FC = () => {
   }, [employeeId, getEmployeeById, employee]);
 
   if (!employee) {
-    return <div>Loading 3...</div>;
+    return <Loader />;
   }
 
   return isloading ? (
-    <h1>...loading...</h1>
+    <Loader />
   ) : (
     <div className="flex flex-col justify-center p-6">
       <div className="flex justify-center">

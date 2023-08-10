@@ -5,7 +5,7 @@ import { EmployeeDetailsPage, EmployeeFormPage, HomePage } from "../pages";
 export const MainRoute: React.FC = () => {
   return (
     <BrowserRouter>
-      <main className="flex flex-col justify-start w-screen h-screen bg-white">
+      <main className="flex flex-col justify-start w-screen h-screen bg-white overflow-x-hidden">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/employee/:employeeId" element={<EmployeeDetailsPage />} />

@@ -1,6 +1,6 @@
 import { useContext, useEffect, FC } from "react";
 import { useFakeApi } from "../hooks";
-import { AddEmployee, EmployeeTable } from "../components";
+import { AddEmployee, EmployeeTable, Loader } from "../components";
 import EmployeeContext from "../context/employeeContext";
 import { useNavigate } from "react-router-dom";
 
@@ -25,7 +25,7 @@ export const HomePage: FC = () => {
   return (
     <div>
       {isloading ? (
-        <h1>loading...</h1>
+        <Loader />
       ) : (
         <div>
           <EmployeeTable

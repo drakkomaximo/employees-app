@@ -4,9 +4,9 @@ export const fakeData: Employee[] = [
     {
       id: "test1",
       firstName: 'John',
+      middleName: 'Sena',
       lastName: 'Doe',
       positionTitle: 'developer',
-      dateArrival: '2023-08-01',
       status: 'Active',
       locationCity: 'Cityville',
       address: '123 Main St',
@@ -20,9 +20,9 @@ export const fakeData: Employee[] = [
     {
       id: "test2",
       firstName: 'Jane',
+      middleName: 'Lee',
       lastName: 'Smith',
       positionTitle: 'developer',
-      dateArrival: '2023-07-15',
       status: 'Active',
       locationCity: 'Townsville',
       address: '456 Elm St',

@@ -10,7 +10,7 @@ export const AddEmployee: FC = () => {
   return (
     <div className="fixed bottom-4 right-4">
       <button
-        className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-full shadow-lg flex items-center focus:outline-none focus:shadow-outline"
+        className="font-bold bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-full shadow-lg flex items-center focus:outline-none focus:shadow-outline"
         onClick={goToCreateEmployee}
       >
         <span className="hidden md:inline-block">Create Employee</span>
