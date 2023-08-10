@@ -18,6 +18,7 @@ yarn run dev
 ## Notes
 
 - The app is in English by default.
+- The app starts with fake information, but you can edit or delete it as needed.
 - **Validations:**
   - **Address:** The address has a validation rule: You can add a new address if it starts with ['calle', 'avenida', 'transversal']. The rest of the address doesn't matter.
   - **Telephone:** Telephone numbers are validated according to Colombian phone number formats.
